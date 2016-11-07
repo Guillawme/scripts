@@ -15,14 +15,24 @@
 
 # SRC is the local directory to backup.
 # DEST is the external drive where to store backups.
+# By default, SRC and DEST are read from command-line arguments.
 # EXCLUDE points to a file containing a list of paths to exclude from backups;
 # by default this file is `$HOME/.rsync/exclude' (see rsync doc for details).
-SRC=$HOME
-DEST=
+SRC=$1
+DEST=$2
 EXCLUDE=$HOME/.rsync/exclude
 
 
 ### Do not edit after this line. ###
+
+# If no SRC and DEST are provided as command-line arguments, display a short
+# usage guide.
+if [ $# != 2 ]; then
+    echo "Usage: ./backup.sh SRC DEST"
+    echo "SRC is the source directory to backup."
+    echo "DEST is the destination directory where to store backups."
+    exit 0
+fi
 
 # We cannot backup if the destination directory is not present (typically, this
 # directory would be on an external drive, therefore we cannot assume it's
