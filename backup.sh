@@ -1,14 +1,13 @@
 #!/bin/bash
 
 # Backup script based on rsync.
-
-# Adapted from <https://blog.interlinked.org/tutorials/rsync_time_machine.html>
-# and <https://blog.interlinked.org/tutorials/rsync_addendum.yaml.html>
-
 # Creates incremental snapshots in a manner similar to Apple's Time Machine, but
 # with two advantages: it should work on any system where bash and rsync are
 # installed, and on a Mac it offers the possibility to backup only a certain
 # directory (whereas Time Machine only does full backups).
+
+# Adapted from <https://blog.interlinked.org/tutorials/rsync_time_machine.html>
+# and <https://blog.interlinked.org/tutorials/rsync_addendum.yaml.html>
 
 
 ### Configuration: ###
@@ -38,7 +37,15 @@ fi
 # directory would be on an external drive, therefore we cannot assume it's
 # always present).
 if [ ! -d $DEST ]; then
-    echo "Destination directory not found. Please plug your external drive. :-)"
+    echo "Destination directory not found."
+    echo "Please plug your external drive. :-)"
+    exit 0
+fi
+
+# Sanity check: if the local directory doesn't exist, we need to tell the user.
+if [ ! -d $SRC ]; then
+    echo "Local directory not found."
+    echo "Please specify an existing directory to backup."
     exit 0
 fi
 
