@@ -25,6 +25,7 @@ if [ $# != 2 ]; then
     echo "Usage: ./restore.sh BKP LOC"
     echo "BKP is the backup directory to restore."
     echo "LOC is the local directory where the backup contents will be copied."
+    echo "LOC will be created if it does not already exist."
     exit 0
 fi
 
@@ -37,11 +38,10 @@ if [ ! -d $BKP ]; then
     exit 0
 fi
 
-# Sanity check: if the local directory doesn't exist, we need to tell the user.
+# Sanity check: if the local directory doesn't exist, create it and inform the user.
 if [ ! -d $LOC ]; then
-    echo "Local directory not found."
-    echo "Please specify an existing directory to receive restored files."
-    exit 0
+    echo "Creating local directory" $LOC
+    mkdir -p $LOC
 fi
 
 # If this script runs on a Mac, we need the -E option to preserve "extended
