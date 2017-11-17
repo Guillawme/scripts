@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Restore script based on rsync.
 # Restores from a backup located on a local filesystem (other partition, external

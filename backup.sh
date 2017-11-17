@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Backup script based on rsync.
 # Creates incremental snapshots in a manner similar to Apple's Time Machine, but
