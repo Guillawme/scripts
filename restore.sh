@@ -57,9 +57,23 @@ DATE=`date "+%Y-%m-%d_%H-%M-%S"`
 
 # Restore: copy BKP to LOC, preserving all file properties (owner, permissions,
 # modification time, extended attributes, etc.).
-rsync -azxP \
-      --human-readable \
-      --log-file=$LOC/$DATE-restore.log \
+rsync --recursive \
+      --links \
+      --perms \
+      --executability \
+      --acls \
+      --xattrs \
+      --owner \
+      --group \
+      --devices \
+      --specials \
+      --times \
       --delete \
+      --update \
+      --one-file-system \
+      --human-readable \
+      --progress \
+      --stats \
+      --log-file=$LOC/$DATE-restore.log \
       $BKP $LOC
 

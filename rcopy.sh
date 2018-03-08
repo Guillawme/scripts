@@ -53,7 +53,6 @@ rsync --recursive \
       --devices \
       --specials \
       --times \
-      --partial \
       --delete \
       --update \
       --one-file-system \

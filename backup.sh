@@ -73,11 +73,25 @@ fi
 # If an older backup already exists, we can save disk space with the --link-dest
 # option. Otherwise we proceed with the first backup without this option.
 if [ -L $DEST/latest ]; then
-    rsync -azxP \
-          --human-readable \
-          --log-file=$DEST/$DATE-backup.log \
+    rsync --recursive \
+          --links \
+          --perms \
+          --executability \
+          --acls \
+          --xattrs \
+          --owner \
+          --group \
+          --devices \
+          --specials \
+          --times \
           --delete \
           --delete-excluded \
+          --update \
+          --one-file-system \
+          --human-readable \
+          --progress \
+          --stats \
+          --log-file=$DEST/$DATE-backup.log \
           --exclude-from=$EXCLUDE \
           --link-dest=$DEST/latest \
           $SRC $DEST/$DATE-backup
@@ -86,8 +100,24 @@ if [ -L $DEST/latest ]; then
     rm -f $DEST/latest
     ln -s $DEST/$DATE-backup $DEST/latest
 else
-    rsync -azxP \
+    rsync --recursive \
+          --links \
+          --perms \
+          --executability \
+          --acls \
+          --xattrs \
+          --owner \
+          --group \
+          --devices \
+          --specials \
+          --times \
+          --delete \
+          --delete-excluded \
+          --update \
+          --one-file-system \
           --human-readable \
+          --progress \
+          --stats \
           --log-file=$DEST/$DATE-backup.log \
           --exclude-from=$EXCLUDE \
           $SRC $DEST/$DATE-backup
