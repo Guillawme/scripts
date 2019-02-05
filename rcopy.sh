@@ -55,6 +55,7 @@ rsync --recursive \
       --times \
       --delete \
       --update \
+      --partial \
       --one-file-system \
       --human-readable \
       --progress \
