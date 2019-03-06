@@ -42,23 +42,30 @@ fi
 # Copy SRC to DEST, preserving all file properties (owner, permissions,
 # modification time, etc.). Symbolic links are copied as links, i.e. the file or
 # directory they point to is not copied.
-rsync --recursive \
-      --links \
-      --perms \
-      --executability \
-      --acls \
-      --xattrs \
-      --owner \
-      --group \
-      --devices \
-      --specials \
-      --times \
-      --delete \
-      --update \
-      --partial \
-      --one-file-system \
-      --human-readable \
-      --progress \
-      --stats \
-      $SRC $DEST
+# rsync -auPh is safe to use, so replicate it here:
+rsync \
+    # Options below are equivalent to -a "archive" (which itself means
+    # -rlptgoD):
+    --recursive \
+    --links \
+    --perms \
+    --times \
+    --group \
+    --owner \
+    --devices \
+    --specials \
+    # -u "update" (skip files newer on receiver side):
+    --update \
+    # Options below are equivalent to -P:
+    --partial \
+    --progress \
+    # -h "human-readable":
+    --human-readable \
+    # More options that are normally safe:
+    --executability \
+    --acls \
+    --xattrs \
+    --one-file-system \
+    --stats \
+    $SRC $DEST
 
