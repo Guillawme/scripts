@@ -43,9 +43,15 @@ fi
 # modification time, etc.). Symbolic links are copied as links, i.e. the file or
 # directory they point to is not copied.
 # rsync -auPh is safe to use, so replicate it here:
+
+# Options below, in the order they appear, are equivalent to:
+# -a "archive" (which itself means -rlptgoD)
+# -u "update" (skip files newer on receiver side)
+# -P: --partial --progress
+# -h "human-readable"
+# More options that are normally safe: --executability to stats
+
 rsync \
-    # Options below are equivalent to -a "archive" (which itself means
-    # -rlptgoD):
     --recursive \
     --links \
     --perms \
@@ -54,14 +60,10 @@ rsync \
     --owner \
     --devices \
     --specials \
-    # -u "update" (skip files newer on receiver side):
     --update \
-    # Options below are equivalent to -P:
     --partial \
     --progress \
-    # -h "human-readable":
     --human-readable \
-    # More options that are normally safe:
     --executability \
     --acls \
     --xattrs \
