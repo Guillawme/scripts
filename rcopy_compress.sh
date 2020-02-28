@@ -2,8 +2,8 @@
 
 # Improved `cp' command based on rsync.
 # Makes sure the entire content of a directory, including hidden .files, is
-# copied over. DANGER: This version DELETES files on the receiving side that
-# don't exist on the sending side. USE WITH EXTREME CAUTION.
+# copied over. This version uses compression to speed up copy over a network
+# connection.
 
 ### Configuration: ###
 
@@ -43,7 +43,7 @@ fi
 # Copy SRC to DEST, preserving all file properties (owner, permissions,
 # modification time, etc.). Symbolic links are copied as links, i.e. the file or
 # directory they point to is not copied.
-# rsync -auPh is safe to use, so replicate it here.
+# rsync -auPh is safe to use, so replicate it here:
 
 # Options below, in the order they appear, are equivalent to:
 # -a "archive" (which itself means -rlptgoD)
@@ -51,8 +51,6 @@ fi
 # -P: --partial --progress
 # -h "human-readable"
 # More options that are normally safe: --executability to stats
-# DANGER: --delete will delete files on the receiver side that don't exist
-# anymore on the sender side. Useful to reclaim disk space, but use carefully...
 
 rsync \
     --recursive \
@@ -72,6 +70,6 @@ rsync \
     --xattrs \
     --one-file-system \
     --stats \
-    --delete \
+    --compress \
     $SRC $DEST
 
