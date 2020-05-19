@@ -15,7 +15,7 @@ EXCLUDE="--exclude-from=$HOME/.config/rsync/exclude_sync"
 OPTS='--checksum --recursive --links --times --update --one-file-system --human-readable --progress --stats'
 
 # Always bring back new files from the thumb drive first
-rsync "$OPTS $EXCLUDE $EXTERNAL_DRIVE $LAPTOP"
+rsync $OPTS $EXCLUDE $EXTERNAL_DRIVE $LAPTOP
 
 # Push new files on the laptop side to the thumb drive
-rsync "$OPTS $EXCLUDE $LAPTOP $EXTERNAL_DRIVE"
+rsync $OPTS $EXCLUDE $LAPTOP $EXTERNAL_DRIVE

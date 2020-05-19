@@ -36,7 +36,7 @@ LOG="--log-file=$LOG_DIR/$DATE.log"
 touch "$LOG_DIR/$DATE.log"
 
 # Backup
-rsync "$OPTS $LINK $EXCLUDE $LOG $SRC/ $DEST/$DATE/"
+rsync $OPTS $LINK $EXCLUDE $LOG $SRC/ $DEST/$DATE/
 
 # Update `latest' symlink to point to most recent backup (i.e. the one that
 # rsync just created)
